@@ -1435,6 +1435,8 @@ static int kinetis_fill_fcf(struct flash_bank *bank, uint8_t *fcf)
 
 		kinetis_auto_probe(bank_iter);
 
+		LOG_WARNING("Bank %u", bank_idx);
+	    if(bank_idx == 0) {
 		assert(bank_iter->prot_blocks);
 
 		if (k_bank->flash_class == FC_PFLASH) {
@@ -1454,6 +1456,7 @@ static int kinetis_fill_fcf(struct flash_bank *bank, uint8_t *fcf)
 			}
 
 		}
+	    }
 	}
 
 	target_buffer_set_u32(bank->target, fcf + FCF_FPROT, fprot);
